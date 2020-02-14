@@ -27,8 +27,41 @@ public class OrderReceipt {
 //        output.append(order.getCustomerLoyaltyNumber());
 
         // prints lineItems
+        printOrderInfo(output);
+
+        // calculate sales tax @ rate of 10%
+        double totalTax = getTotalTax();
+
+        // calculate total amount of lineItem = price * quantity + 10 % sales tax
+        double totalGoodsMoney = totalGoodsMoney();
+
+        double totalMoney = totalTax + totalGoodsMoney;
+        // prints the state tax
+        output.append("Sales Tax").append('\t').append(totalTax);
+
+        // print total amount
+        output.append("Total Amount").append('\t').append(totalMoney);
+        return output.toString();
+    }
+
+    private double totalGoodsMoney() {
+        double totalGoodsMoney = 0d;
+        for (LineItem lineItem : order.getLineItems()) {
+            totalGoodsMoney += lineItem.totalAmount();
+        }
+        return totalGoodsMoney;
+    }
+
+    private double getTotalTax() {
         double totalTax = 0d;
-        double totalMoney = 0d;
+        for (LineItem lineItem : order.getLineItems()) {
+            double salesTax = lineItem.totalAmount() * .10;
+            totalTax += salesTax;
+        }
+        return totalTax;
+    }
+
+    private void printOrderInfo(StringBuilder output) {
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription());
             output.append('\t');
@@ -38,20 +71,6 @@ public class OrderReceipt {
             output.append('\t');
             output.append(lineItem.totalAmount());
             output.append('\n');
-
-            // calculate sales tax @ rate of 10%
-            double salesTax = lineItem.totalAmount() * .10;
-            totalTax += salesTax;
-
-            // calculate total amount of lineItem = price * quantity + 10 % sales tax
-            totalMoney += lineItem.totalAmount() + salesTax;
         }
-
-        // prints the state tax
-        output.append("Sales Tax").append('\t').append(totalTax);
-
-        // print total amount
-        output.append("Total Amount").append('\t').append(totalMoney);
-        return output.toString();
     }
 }
