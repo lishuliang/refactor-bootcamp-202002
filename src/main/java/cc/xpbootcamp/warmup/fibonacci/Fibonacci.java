@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Fibonacci {
     private final int position;
-    private ArrayList<Integer> resultList;
+    private ArrayList<Long> resultList;
 
     public Fibonacci(int position) {
         this.position = position;
-        resultList = new ArrayList<Integer>(){{
-            add(0);
-            add(1);
-            add(1);
+        resultList = new ArrayList<Long>(){{
+            add((long) 0);
+            add((long) 1);
+            add((long) 1);
         }};
     }
 
@@ -22,7 +22,7 @@ public class Fibonacci {
         }
     }
 
-    public int getFibonacci() {
+    public long getFibonacci() {
         return resultList.get(position);
     }
 }
