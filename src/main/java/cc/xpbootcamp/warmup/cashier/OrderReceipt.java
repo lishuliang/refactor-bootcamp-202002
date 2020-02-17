@@ -17,23 +17,19 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        // print headers
         output.append("======Printing Orders======\n");
 
-        // print date, bill no, customer name
 //        output.append("Date - " + order.getDate();
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
 //        output.append(order.getCustomerLoyaltyNumber());
 
-        // prints lineItems
-        printOrderInfo(output);
+        output.append(getLineItem());
 
-        // prints the state tax
         output.append("Sales Tax").append('\t').append(totalTax());
 
-        // print total amount
         output.append("Total Amount").append('\t').append(totalTax() + totalGoodsMoney());
+
         return output.toString();
     }
 
@@ -47,23 +43,29 @@ public class OrderReceipt {
 
     private double totalTax() {
         double totalTax = 0d;
+
         for (LineItem lineItem : order.getLineItems()) {
             double salesTax = lineItem.totalAmount() * .10;
             totalTax += salesTax;
         }
+
         return totalTax;
     }
 
-    private void printOrderInfo(StringBuilder output) {
+    private String getLineItem() {
+        StringBuilder result = new StringBuilder();
+
         for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.getDescription());
-            output.append('\t');
-            output.append(lineItem.getPrice());
-            output.append('\t');
-            output.append(lineItem.getQuantity());
-            output.append('\t');
-            output.append(lineItem.totalAmount());
-            output.append('\n');
+            result.append(lineItem.getDescription());
+            result.append('\t');
+            result.append(lineItem.getPrice());
+            result.append('\t');
+            result.append(lineItem.getQuantity());
+            result.append('\t');
+            result.append(lineItem.totalAmount());
+            result.append('\n');
         }
+
+        return result.toString();
     }
 }
