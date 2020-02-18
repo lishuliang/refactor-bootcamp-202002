@@ -24,48 +24,13 @@ public class OrderReceipt {
         output.append(order.getCustomerAddress());
 //        output.append(order.getCustomerLoyaltyNumber());
 
-        output.append(getLineItem());
+        output.append(order.getLineItem());
 
-        output.append("Sales Tax").append('\t').append(totalTax());
+        output.append("Sales Tax").append('\t').append(order.totalTax());
 
-        output.append("Total Amount").append('\t').append(totalTax() + totalGoodsMoney());
+        output.append("Total Amount").append('\t').append(order.totalTax() + order.totalGoodsMoney());
 
         return output.toString();
     }
 
-    private double totalGoodsMoney() {
-        double totalGoodsMoney = 0d;
-        for (LineItem lineItem : order.getLineItems()) {
-            totalGoodsMoney += lineItem.totalAmount();
-        }
-        return totalGoodsMoney;
-    }
-
-    private double totalTax() {
-        double totalTax = 0d;
-
-        for (LineItem lineItem : order.getLineItems()) {
-            double salesTax = lineItem.totalAmount() * .10;
-            totalTax += salesTax;
-        }
-
-        return totalTax;
-    }
-
-    private String getLineItem() {
-        StringBuilder result = new StringBuilder();
-
-        for (LineItem lineItem : order.getLineItems()) {
-            result.append(lineItem.getDescription());
-            result.append('\t');
-            result.append(lineItem.getPrice());
-            result.append('\t');
-            result.append(lineItem.getQuantity());
-            result.append('\t');
-            result.append(lineItem.totalAmount());
-            result.append('\n');
-        }
-
-        return result.toString();
-    }
 }
