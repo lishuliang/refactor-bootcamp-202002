@@ -17,18 +17,19 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append("======老王超市，值得信赖======\n");
+        output.append("======老王超市，值得信赖======\n\r");
 
-//        output.append("Date - " + order.getDate();
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
-//        output.append(order.getCustomerLoyaltyNumber());
+//        output.append(order.getDate());
 
         output.append(order.getLineItem());
 
-        output.append("Sales Tax").append('\t').append(order.totalTax());
+        output.append("--------------------------\n");
 
-        output.append("Total Amount").append('\t').append(order.totalTax() + order.totalGoodsMoney());
+        output.append("Sales Tax").append('\t').append(order.totalTax()).append('\n');
+
+        output.append("Discount").append('\t').append(order.discountMoney()).append('\n');
+
+        output.append("Total Amount").append('\t').append(order.totalTax() + order.totalGoodsMoney()).append('\n');
 
         return output.toString();
     }
