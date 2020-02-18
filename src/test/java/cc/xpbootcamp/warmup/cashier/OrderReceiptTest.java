@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertEquals;
 
 class OrderReceiptTest {
     @Test
@@ -33,11 +34,14 @@ class OrderReceiptTest {
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("======老王超市，值得信赖======\n"));
+        assertThat(output, containsString("2020年02月18日, Tue\n"));
         assertThat(output, containsString("milk, 10.0 * 2, 20.0\n"));
         assertThat(output, containsString("biscuits, 5.0 * 5, 25.0\n"));
         assertThat(output, containsString("chocolate, 20.0 * 1, 20.0\n"));
         assertThat(output, containsString("Sales Tax\t6.5"));
         assertThat(output, containsString("Total Amount\t71.5"));
+
+//        assertEquals(output, "");
     }
 
 }

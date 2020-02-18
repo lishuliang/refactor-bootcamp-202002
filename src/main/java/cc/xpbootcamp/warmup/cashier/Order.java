@@ -1,6 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class Order {
     private String cName;
     private String addr;
     private List<LineItem> lineItemList;
+    private Date date;
     private static final double discount = 0.98d;
     private static final double tax = 0.10d;
 
@@ -15,6 +17,7 @@ public class Order {
         this.cName = cName;
         this.addr = addr;
         this.lineItemList = lineItemList;
+        this.date = new Date();
     }
 
     public String getCustomerName() {
@@ -27,6 +30,10 @@ public class Order {
 
     public List<LineItem> getLineItems() {
         return lineItemList;
+    }
+
+    public Date getDate() {
+        return this.date;
     }
 
     public double totalTax() {
@@ -67,8 +74,16 @@ public class Order {
         return moneyFormat.format(money);
     }
 
-//    public String getDate() {
-//        Date date = new Date();
-//        return "";
-//    }
+    public String getFormatDate() {
+        String dateFormat = "yyyy年MM月dd日, EEE";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+
+        return simpleDateFormat.format(this.getDate()) + "\n\r";
+    }
+
+    public boolean isDiscount() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
+
+        return "Wed".equals(simpleDateFormat.format(getDate()));
+    }
 }

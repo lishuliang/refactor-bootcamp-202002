@@ -19,7 +19,7 @@ public class OrderReceipt {
 
         output.append("======老王超市，值得信赖======\n\r");
 
-//        output.append(order.getDate());
+        output.append(order.getFormatDate());
 
         output.append(order.getLineItem());
 
