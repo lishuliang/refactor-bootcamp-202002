@@ -25,11 +25,7 @@ public class OrderReceipt {
 
         output.append("--------------------------\n");
 
-        output.append("Sales Tax").append('\t').append(order.totalTax()).append('\n');
-
-        output.append("Discount").append('\t').append(order.discountMoney()).append('\n');
-
-        output.append("Total Amount").append('\t').append(order.totalTax() + order.totalGoodsMoney()).append('\n');
+        output.append(order.amountInfo());
 
         return output.toString();
     }

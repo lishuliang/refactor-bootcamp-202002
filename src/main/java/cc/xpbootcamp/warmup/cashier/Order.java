@@ -36,6 +36,22 @@ public class Order {
         return this.date;
     }
 
+    public String amountInfo() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("Sales Tax: ").append(totalTax()).append('\n');
+
+        if(isDiscount()) {
+            result.append("Discount: ").append(discountMoney()).append('\n');
+            result.append("Total Amount: ").append(totalTax() + totalGoodsMoney() - discountMoney()).append('\n');
+
+        } else {
+            result.append("Total Amount: ").append(totalTax() + totalGoodsMoney()).append('\n');
+        }
+
+        return result.toString();
+    }
+
     public double totalTax() {
         double totalTax = 0d;
         for (LineItem lineItem : getLineItems()) {
@@ -84,6 +100,6 @@ public class Order {
     public boolean isDiscount() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
 
-        return "Wed".equals(simpleDateFormat.format(getDate()));
+        return "Wed".equals(simpleDateFormat.format(this.getDate()));
     }
 }
