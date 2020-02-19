@@ -26,9 +26,8 @@ class OrderReceiptTest {
     @Test
     public void shouldPrintLineItemAndSalesTaxInformation() throws ParseException {
         List<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("milk", 10.0, 2));
-            add(new LineItem("biscuits", 5.0, 5));
-            add(new LineItem("chocolate", 20.0, 1));
+            add(new LineItem("巧克力", 21.50, 2));
+            add(new LineItem("小白菜", 10.00, 1));
         }};
         Order order = spy(new Order(null, null, lineItems));
         OrderReceipt receipt = new OrderReceipt(order);
@@ -39,19 +38,17 @@ class OrderReceiptTest {
 
         assertThat(output, containsString("======老王超市，值得信赖======\n"));
         assertThat(output, containsString("2020年02月18日, Tue\n"));
-        assertThat(output, containsString("milk, 10.0 * 2, 20.0\n"));
-        assertThat(output, containsString("biscuits, 5.0 * 5, 25.0\n"));
-        assertThat(output, containsString("chocolate, 20.0 * 1, 20.0\n"));
-        assertThat(output, containsString("Sales Tax: 6.50"));
-        assertThat(output, containsString("Total Amount: 71.50"));
+        assertThat(output, containsString("巧克力, 21.5 * 2, 43.0\n"));
+        assertThat(output, containsString("小白菜, 10.0 * 1, 10.0\n"));
+        assertThat(output, containsString("Sales Tax: 5.30"));
+        assertThat(output, containsString("Total Amount: 58.30"));
     }
 
     @Test
     public void shouldPrintLineItemAndSalesTaxAndDiscountInformationWhenWednesday() throws ParseException {
         List<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("milk", 10.0, 2));
-            add(new LineItem("biscuits", 5.0, 5));
-            add(new LineItem("chocolate", 20.0, 1));
+            add(new LineItem("巧克力", 21.50, 2));
+            add(new LineItem("小白菜", 10.00, 1));
         }};
         Order order = spy(new Order(null, null, lineItems));
         OrderReceipt receipt = new OrderReceipt(order);
@@ -62,11 +59,10 @@ class OrderReceiptTest {
 
         assertThat(output, containsString("======老王超市，值得信赖======\n"));
         assertThat(output, containsString("2020年02月19日, Wed\n"));
-        assertThat(output, containsString("milk, 10.0 * 2, 20.0\n"));
-        assertThat(output, containsString("biscuits, 5.0 * 5, 25.0\n"));
-        assertThat(output, containsString("chocolate, 20.0 * 1, 20.0\n"));
-        assertThat(output, containsString("Sales Tax: 6.50"));
-        assertThat(output, containsString("Discount: 1.30"));
-        assertThat(output, containsString("Total Amount: 70.20"));
+        assertThat(output, containsString("巧克力, 21.5 * 2, 43.0\n"));
+        assertThat(output, containsString("小白菜, 10.0 * 1, 10.0\n"));
+        assertThat(output, containsString("Sales Tax: 5.30"));
+        assertThat(output, containsString("Discount: 1.17"));
+        assertThat(output, containsString("Total Amount: 57.13"));
     }
 }

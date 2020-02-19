@@ -82,7 +82,7 @@ public class Order {
     }
 
     public double discountMoney() {
-        return totalGoodsMoney() * (1 - discount);
+        return (totalGoodsMoney() + totalTax()) * (1 - discount);
     }
 
     public String formatMoney(double money) {
