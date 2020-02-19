@@ -39,14 +39,14 @@ public class Order {
     public String amountInfo() {
         StringBuilder result = new StringBuilder();
 
-        result.append("Sales Tax: ").append(formatMoney(totalTax())).append('\n');
+        result.append("税额: ").append(formatMoney(totalTax())).append('\n');
 
         if(isDiscount()) {
-            result.append("Discount: ").append(formatMoney(discountMoney())).append('\n');
-            result.append("Total Amount: ").append(formatMoney(totalTax() + totalGoodsMoney() - discountMoney())).append('\n');
+            result.append("折扣: ").append(formatMoney(discountMoney())).append('\n');
+            result.append("总价: ").append(formatMoney(totalTax() + totalGoodsMoney() - discountMoney())).append('\n');
 
         } else {
-            result.append("Total Amount: ").append(formatMoney(totalTax() + totalGoodsMoney())).append('\n');
+            result.append("总价: ").append(formatMoney(totalTax() + totalGoodsMoney())).append('\n');
         }
 
         return result.toString();

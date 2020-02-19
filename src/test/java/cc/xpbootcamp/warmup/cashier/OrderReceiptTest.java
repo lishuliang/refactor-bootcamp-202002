@@ -40,8 +40,8 @@ class OrderReceiptTest {
         assertThat(output, containsString("2020年02月18日, Tue\n"));
         assertThat(output, containsString("巧克力, 21.5 * 2, 43.0\n"));
         assertThat(output, containsString("小白菜, 10.0 * 1, 10.0\n"));
-        assertThat(output, containsString("Sales Tax: 5.30"));
-        assertThat(output, containsString("Total Amount: 58.30"));
+        assertThat(output, containsString("税额: 5.30"));
+        assertThat(output, containsString("总价: 58.30"));
     }
 
     @Test
@@ -61,8 +61,8 @@ class OrderReceiptTest {
         assertThat(output, containsString("2020年02月19日, Wed\n"));
         assertThat(output, containsString("巧克力, 21.5 * 2, 43.0\n"));
         assertThat(output, containsString("小白菜, 10.0 * 1, 10.0\n"));
-        assertThat(output, containsString("Sales Tax: 5.30"));
-        assertThat(output, containsString("Discount: 1.17"));
-        assertThat(output, containsString("Total Amount: 57.13"));
+        assertThat(output, containsString("税额: 5.30"));
+        assertThat(output, containsString("折扣: 1.17"));
+        assertThat(output, containsString("总价: 57.13"));
     }
 }
