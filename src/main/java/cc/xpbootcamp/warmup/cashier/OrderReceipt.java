@@ -1,5 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import static cc.xpbootcamp.warmup.util.Util.formatMoney;
 import static cc.xpbootcamp.warmup.util.Util.getFormatDate;
 
 /**
@@ -19,17 +20,40 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append("======老王超市，值得信赖======\n\r");
-
-        output.append(getFormatDate(order.getDate()));
+        output.append(receiptHeader());
 
         output.append(order.getLineItem());
 
-        output.append("--------------------------\n");
-
-        output.append(order.amountInfo());
+        output.append(receiptFooter());
 
         return output.toString();
+    }
+
+    public String receiptHeader() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("======老王超市，值得信赖======\n\r");
+
+        result.append(getFormatDate(order.getDate()));
+
+        return result.toString();
+    }
+
+    public String receiptFooter() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("--------------------------\n");
+
+        result.append("税额: ").append(formatMoney(order.totalTax())).append('\n');
+
+        if(order.isDiscount()) {
+            result.append("折扣: ").append(formatMoney(order.discountMoney())).append('\n');
+
+        }
+
+        result.append("总价: ").append(formatMoney(order.total())).append('\n');
+
+        return result.toString();
     }
 
 }

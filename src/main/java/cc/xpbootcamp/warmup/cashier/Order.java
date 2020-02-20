@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static cc.xpbootcamp.warmup.util.Util.formatMoney;
 import static cc.xpbootcamp.warmup.util.Util.getCurrentWeek;
 
 public class Order {
@@ -12,9 +11,8 @@ public class Order {
     private String addr;
     private List<LineItem> lineItemList;
     private Date date;
-    private static final double discount = 0.98d;
-    private static final int discountDay = Calendar.WEDNESDAY;
-    private static final double tax = 0.10d;
+    private static final double DISCOUNT = 0.98d;
+    private static final int DISCOUNT_DAY = Calendar.WEDNESDAY;
 
     public Order(String cName, String addr, List<LineItem> lineItemList) {
         this.cName = cName;
@@ -39,56 +37,46 @@ public class Order {
         return this.date;
     }
 
-    public String amountInfo() {
-        StringBuilder result = new StringBuilder();
-
-        result.append("税额: ").append(formatMoney(totalTax())).append('\n');
-
-        if(isDiscount()) {
-            result.append("折扣: ").append(formatMoney(discountMoney())).append('\n');
-            result.append("总价: ").append(formatMoney(totalTax() + totalGoodsMoney() - discountMoney())).append('\n');
-
-        } else {
-            result.append("总价: ").append(formatMoney(totalTax() + totalGoodsMoney())).append('\n');
-        }
-
-        return result.toString();
-    }
-
     public double totalTax() {
         double totalTax = 0d;
         for (LineItem lineItem : getLineItems()) {
-            double salesTax = lineItem.totalAmount() * tax;
+            double salesTax = lineItem.salesTax();
             totalTax += salesTax;
         }
-
         return totalTax;
     }
 
-    public double totalGoodsMoney() {
-        double totalGoodsMoney = 0d;
+    public double totalAmount() {
+        double totalAmount = 0d;
         for (LineItem lineItem : getLineItems()) {
-            totalGoodsMoney += lineItem.totalAmount();
+            totalAmount += lineItem.total();
         }
 
-        return totalGoodsMoney;
+        return totalAmount;
+    }
+
+    public double total() {
+        if (isDiscount()) {
+            return totalAmount() * DISCOUNT;
+        }
+        return totalAmount();
     }
 
     public String getLineItem() {
         StringBuilder result = new StringBuilder();
 
         for (LineItem lineItem : getLineItems()) {
-            result.append(lineItem.getLineItemInfo());
+            result.append(lineItem.print());
         }
 
         return result.toString();
     }
 
     public double discountMoney() {
-        return (totalGoodsMoney() + totalTax()) * (1 - discount);
+        return totalAmount() * (1 - DISCOUNT);
     }
 
     public boolean isDiscount() {
-        return discountDay == getCurrentWeek(getDate());
+        return DISCOUNT_DAY == getCurrentWeek(getDate());
     }
 }

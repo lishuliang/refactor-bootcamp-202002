@@ -6,6 +6,7 @@ public class LineItem {
 	private String description;
 	private double price;
 	private int quantity;
+	private static final double RATE = .10d;
 
 	public LineItem(String description, double price, int quantity) {
 		super();
@@ -30,7 +31,15 @@ public class LineItem {
         return price * quantity;
     }
 
-    public String getLineItemInfo() {
+    public double salesTax() {
+		return totalAmount() * RATE;
+	}
+
+	public double total() {
+		return totalAmount() + salesTax();
+	}
+
+    public String print() {
 		return getDescription() +
 				", " +
 				formatMoney(getPrice()) +
