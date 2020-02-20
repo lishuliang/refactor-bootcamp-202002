@@ -40,8 +40,7 @@ public class Order {
     public double totalTax() {
         double totalTax = 0d;
         for (LineItem lineItem : getLineItems()) {
-            double salesTax = lineItem.salesTax();
-            totalTax += salesTax;
+            totalTax += lineItem.salesTax();
         }
         return totalTax;
     }
@@ -62,7 +61,7 @@ public class Order {
         return totalAmount();
     }
 
-    public String getLineItem() {
+    public String printLineItem() {
         StringBuilder result = new StringBuilder();
 
         for (LineItem lineItem : getLineItems()) {

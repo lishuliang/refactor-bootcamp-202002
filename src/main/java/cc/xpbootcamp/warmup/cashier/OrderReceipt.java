@@ -22,7 +22,7 @@ public class OrderReceipt {
 
         output.append(receiptHeader());
 
-        output.append(order.getLineItem());
+        output.append(order.printLineItem());
 
         output.append(receiptFooter());
 
