@@ -1,5 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import static cc.xpbootcamp.warmup.util.Util.getFormatDate;
+
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
  * price and amount. It also calculates the sales tax @ 10% and prints as part
@@ -19,7 +21,7 @@ public class OrderReceipt {
 
         output.append("======老王超市，值得信赖======\n\r");
 
-        output.append(order.getFormatDate());
+        output.append(getFormatDate(order.getDate()));
 
         output.append(order.getLineItem());
 

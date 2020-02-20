@@ -37,9 +37,9 @@ class OrderReceiptTest {
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("======老王超市，值得信赖======\n"));
-        assertThat(output, containsString("2020年02月18日, Tue\n"));
-        assertThat(output, containsString("巧克力, 21.5 * 2, 43.0\n"));
-        assertThat(output, containsString("小白菜, 10.0 * 1, 10.0\n"));
+        assertThat(output, containsString("2020年02月18日, 星期二\n"));
+        assertThat(output, containsString("巧克力, 21.50 * 2, 43.00\n"));
+        assertThat(output, containsString("小白菜, 10.00 * 1, 10.00\n"));
         assertThat(output, containsString("税额: 5.30"));
         assertThat(output, containsString("总价: 58.30"));
     }
@@ -58,9 +58,9 @@ class OrderReceiptTest {
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("======老王超市，值得信赖======\n"));
-        assertThat(output, containsString("2020年02月19日, Wed\n"));
-        assertThat(output, containsString("巧克力, 21.5 * 2, 43.0\n"));
-        assertThat(output, containsString("小白菜, 10.0 * 1, 10.0\n"));
+        assertThat(output, containsString("2020年02月19日, 星期三\n"));
+        assertThat(output, containsString("巧克力, 21.50 * 2, 43.00\n"));
+        assertThat(output, containsString("小白菜, 10.00 * 1, 10.00\n"));
         assertThat(output, containsString("税额: 5.30"));
         assertThat(output, containsString("折扣: 1.17"));
         assertThat(output, containsString("总价: 57.13"));

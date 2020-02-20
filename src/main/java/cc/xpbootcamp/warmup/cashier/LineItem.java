@@ -1,5 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import static cc.xpbootcamp.warmup.util.Util.formatMoney;
+
 public class LineItem {
 	private String description;
 	private double price;
@@ -31,11 +33,11 @@ public class LineItem {
     public String getLineItemInfo() {
 		return getDescription() +
 				", " +
-				getPrice() +
+				formatMoney(getPrice()) +
 				" * " +
 				getQuantity() +
 				", " +
-				totalAmount() +
+				formatMoney(totalAmount()) +
 				'\n';
 	}
 }

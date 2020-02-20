@@ -1,9 +1,11 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static cc.xpbootcamp.warmup.util.Util.formatMoney;
+import static cc.xpbootcamp.warmup.util.Util.getCurrentWeek;
 
 public class Order {
     private String cName;
@@ -11,6 +13,7 @@ public class Order {
     private List<LineItem> lineItemList;
     private Date date;
     private static final double discount = 0.98d;
+    private static final int discountDay = Calendar.WEDNESDAY;
     private static final double tax = 0.10d;
 
     public Order(String cName, String addr, List<LineItem> lineItemList) {
@@ -85,21 +88,7 @@ public class Order {
         return (totalGoodsMoney() + totalTax()) * (1 - discount);
     }
 
-    public String formatMoney(double money) {
-        DecimalFormat moneyFormat = new DecimalFormat("#.00");
-        return moneyFormat.format(money);
-    }
-
-    public String getFormatDate() {
-        String dateFormat = "yyyy年MM月dd日, EEE";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-
-        return simpleDateFormat.format(this.getDate()) + "\n\r";
-    }
-
     public boolean isDiscount() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
-
-        return "Wed".equals(simpleDateFormat.format(this.getDate()));
+        return discountDay == getCurrentWeek(getDate());
     }
 }
