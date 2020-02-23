@@ -22,7 +22,7 @@ public class OrderReceipt {
 
         output.append(receiptHeader());
 
-        output.append(order.printLineItem());
+        output.append(receiptGoodsItem());
 
         output.append(receiptFooter());
 
@@ -39,6 +39,17 @@ public class OrderReceipt {
         return result.toString();
     }
 
+    public String receiptGoodsItem() {
+        StringBuilder result = new StringBuilder();
+        order.getLineItems().forEach(lineItem -> result.append(lineItem.getDescription())
+                .append(", ")
+                .append(formatMoney(lineItem.getPrice()))
+                .append(" * ").append(lineItem.getQuantity())
+                .append(", ")
+                .append(formatMoney(lineItem.totalAmount())).append('\n'));
+        return result.toString();
+    }
+
     public String receiptFooter() {
         StringBuilder result = new StringBuilder();
 
@@ -48,7 +59,6 @@ public class OrderReceipt {
 
         if(order.isDiscount()) {
             result.append("折扣: ").append(formatMoney(order.discountMoney())).append('\n');
-
         }
 
         result.append("总价: ").append(formatMoney(order.total())).append('\n');

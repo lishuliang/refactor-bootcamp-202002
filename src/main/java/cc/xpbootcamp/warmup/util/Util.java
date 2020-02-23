@@ -13,12 +13,12 @@ public class Util {
     }
 
     public static String getFormatDate(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日, EEEE\n\r", Locale.CHINA);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日, EEE\n\r", Locale.CHINA);
 
         return simpleDateFormat.format(date);
     }
 
-    public static int getCurrentWeek(Date date) {
+    public static int getDayOfCurrentWeek(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.DAY_OF_WEEK);

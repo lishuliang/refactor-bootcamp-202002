@@ -1,7 +1,5 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import static cc.xpbootcamp.warmup.util.Util.formatMoney;
-
 public class LineItem {
 	private String description;
 	private double price;
@@ -37,16 +35,5 @@ public class LineItem {
 
 	public double total() {
 		return totalAmount() + salesTax();
-	}
-
-    public String print() {
-		return getDescription() +
-				", " +
-				formatMoney(getPrice()) +
-				" * " +
-				getQuantity() +
-				", " +
-				formatMoney(totalAmount()) +
-				'\n';
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static cc.xpbootcamp.warmup.util.Util.getCurrentWeek;
+import static cc.xpbootcamp.warmup.util.Util.getDayOfCurrentWeek;
 
 public class Order {
     private String cName;
@@ -34,41 +34,19 @@ public class Order {
     }
 
     public Date getDate() {
-        return this.date;
+        return date;
     }
 
     public double totalTax() {
-        double totalTax = 0d;
-        for (LineItem lineItem : getLineItems()) {
-            totalTax += lineItem.salesTax();
-        }
-        return totalTax;
+        return getLineItems().stream().mapToDouble(LineItem::salesTax).sum();
     }
 
     public double totalAmount() {
-        double totalAmount = 0d;
-        for (LineItem lineItem : getLineItems()) {
-            totalAmount += lineItem.total();
-        }
-
-        return totalAmount;
+        return getLineItems().stream().mapToDouble(LineItem::total).sum();
     }
 
     public double total() {
-        if (isDiscount()) {
-            return totalAmount() * DISCOUNT;
-        }
-        return totalAmount();
-    }
-
-    public String printLineItem() {
-        StringBuilder result = new StringBuilder();
-
-        for (LineItem lineItem : getLineItems()) {
-            result.append(lineItem.print());
-        }
-
-        return result.toString();
+        return isDiscount() ? totalAmount() * DISCOUNT : totalAmount();
     }
 
     public double discountMoney() {
@@ -76,6 +54,6 @@ public class Order {
     }
 
     public boolean isDiscount() {
-        return DISCOUNT_DAY == getCurrentWeek(getDate());
+        return DISCOUNT_DAY == getDayOfCurrentWeek(getDate());
     }
 }
